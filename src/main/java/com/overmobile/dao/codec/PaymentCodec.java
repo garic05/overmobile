@@ -9,6 +9,10 @@ import org.bson.codecs.EncoderContext;
 import org.bson.codecs.configuration.CodecRegistry;
 
 public class PaymentCodec implements Codec<Payment> {
+    private static final String FIELD_PAYMENTID = "paymentId";
+    private static final String FIELD_USERID = "userId";
+    private static final String FIELD_SUM = "sum";
+
     private CodecRegistry codecRegistry;
 
     public PaymentCodec(CodecRegistry codecRegistry) {
@@ -24,9 +28,9 @@ public class PaymentCodec implements Codec<Payment> {
         Payment payment = new Payment();
         reader.readStartDocument();
         payment.setObjectId(reader.readObjectId());
-        payment.setPaymentId(reader.readString("paymentId"));
-        payment.setUserId(reader.readInt64("userId"));
-        payment.setSum(reader.readInt64("sum"));
+        payment.setPaymentId(reader.readString(FIELD_PAYMENTID));
+        payment.setUserId(reader.readInt64(FIELD_USERID));
+        payment.setSum(reader.readInt64(FIELD_SUM));
         reader.readEndDocument();
 
         return payment;
@@ -35,9 +39,9 @@ public class PaymentCodec implements Codec<Payment> {
     @Override
     public void encode(BsonWriter writer, Payment value, EncoderContext encoderContext) {
         writer.writeStartDocument();
-        writer.writeString("paymentId", value.getPaymentId());
-        writer.writeInt64("userId", value.getUserId());
-        writer.writeInt64("sum", value.getSum());
+        writer.writeString(FIELD_PAYMENTID, value.getPaymentId());
+        writer.writeInt64(FIELD_USERID, value.getUserId());
+        writer.writeInt64(FIELD_SUM, value.getSum());
         writer.writeEndDocument();
     }
 

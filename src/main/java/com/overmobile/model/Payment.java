@@ -1,6 +1,5 @@
 package com.overmobile.model;
 
-import com.mongodb.lang.Nullable;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;

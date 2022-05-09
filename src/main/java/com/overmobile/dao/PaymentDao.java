@@ -1,11 +1,24 @@
 package com.overmobile.dao;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.overmobile.model.Payment;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class PaymentDao {
-    private final MongoClient mongoClient;
+    private static final String FIELD_PAYMENTID = "paymentId";
 
-    public PaymentDao(MongoClient mongoClient) {
-        this.mongoClient = mongoClient;
+    private final MongoCollection<Payment> mongoCollection;
+
+    public PaymentDao(MongoCollection<Payment> mongoCollection) {
+        this.mongoCollection = mongoCollection;
+    }
+
+    public void insert(Payment payment) {
+        mongoCollection.insertOne(payment);
+    }
+    public FindIterable<Payment> findByPaymentId(String paymentId) {
+        return mongoCollection.find(eq(FIELD_PAYMENTID, paymentId));
     }
 }
