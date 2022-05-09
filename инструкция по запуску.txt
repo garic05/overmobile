@@ -1,0 +1,6 @@
+1. ./gradlew war
+2. deploy to ${jetty-base}/webapps
+
+
+
+тест для отправки запросов - ./src/test/java/com/overmobile/servlet/RequestServletTest.java
